@@ -1,3 +1,5 @@
+'use strict';
+
 const os = require('os');
 const cluster = require('cluster');
 const express = require('express');
@@ -5,22 +7,14 @@ const bodyParser = require('body-parser');
 const app = express();
 const config = require('config');
 const port = config.get('port');
+const api = require('./routes/api');
 const models = require('./models');
 
-app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.get('/members', async (req, res, next) => {
-  // models.Member.create({
-  //   email: 'email@test.com',
-  //   pwd: 'hello'
-  // }).then(function() {
-  //   res.send('members');
-  // });
-});
-
 app.get('/', (req, res, next) => {
-  res.send('Hello World');
+  res.send('Hello, nodejs api server sample');
 });
 
 if (cluster.isMaster) {
