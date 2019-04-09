@@ -5,16 +5,17 @@ const bodyParser = require('body-parser');
 const app = express();
 const config = require('config');
 const port = config.get('port');
-const Members = require('./models/Members');
+const models = require('./models');
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
-app.post('/members', (req, res, next) => {
-  console.log(req.body);
-  // Members.create({
-  //   email: 'Practice of Sequelize.js',
-  //   pwd: '123'
+app.get('/members', async (req, res, next) => {
+  // models.Member.create({
+  //   email: 'email@test.com',
+  //   pwd: 'hello'
+  // }).then(function() {
+  //   res.send('members');
   // });
 });
 
