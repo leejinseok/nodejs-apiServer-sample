@@ -2,18 +2,25 @@
 
 const os = require('os');
 const cluster = require('cluster');
+const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const config = require('config');
 const port = config.get('port');
 const api = require('./routes/api');
+const admin = require('./routes/admin');
 const models = require('./models');
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use('/api', api);
+app.use('/admin', admin);
 
-app.get('/', (req, res, next) => {
+app.use('*', (req, res, next) => {
   res.send('Hello, nodejs api server sample');
 });
 
