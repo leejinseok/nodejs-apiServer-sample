@@ -16,7 +16,6 @@ const api = require('./routes/api');
 const models = require('./models');
 const app = express();
 
-
 app.disable('x-powered-by');
 app.use(logger('tiny'));
 app.use(compression());
