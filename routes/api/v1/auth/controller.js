@@ -3,7 +3,13 @@
 /**
  * 로그인 정보
  */
-module.exports.session = (req, res, next) => {
+exports.session = (req, res, next) => {
+  try {
+    const name = req.body.name.sdf;
+  } catch (error) {
+    return next(error);
+  }
+
   res.json({
     id: 'admin',
     permission: 99
