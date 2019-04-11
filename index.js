@@ -13,14 +13,10 @@ const accessCrossDomain = require('./middleware/access-cross-domain');
 const apiHeaderParser = require('./middleware/api-header-parser');
 const errorHandler = require('./middleware/error-handler');
 const api = require('./routes/api');
-const admin = require('./routes/admin');
 const models = require('./models');
 const app = express();
 
 app.disable('x-powered-by');
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
-
 app.use(logger('tiny'));
 app.use(compression());
 app.use(cookieParser());
@@ -28,8 +24,6 @@ app.use(bodyParser.urlencoded({extended: false, limit: '1mb'}));
 app.use(bodyParser.json());
 app.use(accessCrossDomain);
 app.use(apiHeaderParser);
-app.use('/public', express.static(`${__dirname}/public`));
-app.use('/admin', admin);
 app.use('/api', api);
 app.use(errorHandler);
 app.use((req, res) => {
